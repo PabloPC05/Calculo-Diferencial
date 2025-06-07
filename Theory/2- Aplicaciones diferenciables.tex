@@ -1,0 +1,473 @@
+\section{Aplicaciones diferenciables}
+\begin{definición}[Dirección]
+    Llamaremos \textbf{dirección} a un vector $v\in\mathbb{R}^n$. Normalmente de norma $1$. \\
+    Si por ejemplo tenemos $n = 1$ tenemos sólo dos direcciones, $v = 1$ y $v = -1$. En cambio para $n > 1$ tenemos infinitas direcciones. En el caso de $\mathbb{R}^2$ las direccionesde norma 1 pueden escribirse de la forma $v = (\cos\theta, \sin\theta)$, con $\theta\in[0,2\pi)$. \\
+\end{definición}
+
+\begin{definición}[Recta]
+    Llamaremos \textbf{recta} pasando por $x_0$ y de dirección $v$ a la recta $x(t) = x_0 + tv$, donde $t\in\mathbb{R}$. 
+\end{definición}
+
+\begin{definición}[Derivada direccional]
+    Si $f$ es una función definida en un subconjunto abierto $A$ de $\mathbb{R}^n$, $x_0$ es un punto de $A$ y $v$ es una dirección de $\mathbb{R}^n$, se define la derivada de $f$ en $x_0$ en la dirección $v$ como
+    $$ D_vf(x_0) = \lim_{t\to 0} \frac{f(x_0 + tv) - f(x_0)}{t} $$
+\end{definición}
+\begin{observación}
+    Para cualquier dirección $v$ tanto ella como su opuesta $-v$ definen lamisma recta pasando por $x_0$ (el vector de dirección también determina una orientación). Sin embargo, las derivadas en las direcciones $v$ y $-v$ son de signo opuesto: 
+    \begin{align*}
+        D_{-v}f(x_{0})
+        &= \lim_{t \to 0} \frac{f\bigl(x_{0} + t(-v)\bigr) - f(x_{0})}{t} \\
+        &= \lim_{t \to 0} \frac{f\bigl(x_{0} + (-t)\,v\bigr) - f(x_{0})}{t} \\
+        &= \lim_{s \to 0} \frac{f\bigl(x_{0} + s\,v\bigr) - f(x_{0})}{-s} \\
+        &= - \lim_{s \to 0} \frac{f\bigl(x_{0} + s\,v\bigr) - f(x_{0})}{s} \\
+        &= -\,D_{v}f(x_{0}) \,.
+    \end{align*}
+\end{observación}
+
+\begin{definición}[Derivadas parciales]
+    Consideemos en $\mathbb{R}^m$ las direccionesdadas porlos vectores $e_i = (0,\ldots,0,1,0,\ldots,0)$, donde $1$ está en la $i$-ésima posición. 
+    Las derivadas en un punto $x_0$ de una función $f$ en estas direcciones (si es que existen) se llaman \textbf{derivadas parciales} de $f$ en $x_0$ y se denotan por $D_if(x_0) = D_{e_i}f(x_0)$, o también por $\frac{\partial f}{\partial x_i}(x_0)$ o $f_{x_i}(x_0)$. 
+\end{definición}
+
+\begin{definición}[Gradiente]
+    Dada una función $f:A \subset \mathbb{R}^n \to \mathbb{R}$, que tenga todas las derivadas parciales en un punto $x_0\in A$, se llama \textbf{gradiente} de $f$ en $x_0$ al vector
+    $$ \nabla f(x_0) = \bigl(D_1f(x_0), D_2f(x_0), \ldots, D_nf(x_0)\bigr) = \bigl(\frac{\partial f}{\partial x_1}(x_0), \frac{\partial f}{\partial x_2}(x_0), \ldots, \frac{\partial f}{\partial x_n}(x_0)\bigr) \in \mathbb{R}^n $$
+\end{definición}
+
+\begin{definición}[Diferenciable]
+    Dada una función $f:A \subset \mathbb{R}^n \to \mathbb{R}$, es \textbf{diferenciable} en un punto $x_0\in A$ si existe una aplicación lineal $L:\mathbb{R}^n\to\mathbb{R}$ tal que
+    $$ \lim_{x\to x_0} \frac{f(x) - f(x_0) - L(x-x_0)}{\|x-x_0\|} = 0 $$
+    Lo cual equivale: 
+    $$ \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0) - L_{x_0}(h)}{\|h\|} = 0 $$
+\end{definición}
+
+\begin{observación}
+    La existencia del gradiente no garantiza la diferenciabilidad de la función. 
+\end{observación}
+
+\begin{proposición}
+    Toda aplicaciónlineal es diferenciable $\forall x \in \mathbb{R}^n$ y su gradiente es la aplicación lineal misma.
+\end{proposición}
+
+\begin{teorema}
+    Si $f: A \subset \mathbb{R}^n \to \mathbb{R}$ es diferenciable en $x_0\in A$, entonces es derivable en $x_0$ en todas las direcciones $v\in\mathbb{R}^n$. Además sea $v \in \mathbb{R}^n$ una dirección, que supondremos de norma $1$, y una aplicación lineal $L:\mathbb{R}^n\to\mathbb{R}$ tal que
+    $$\lim_{h \to 0} \frac{f(x_0 + h) - f(x_0) - L_{x_0}(h)}{\|h\|} = 0$$
+    entonces
+    $$ L(v) = D_vf(x_0) = \nabla f(x_0) \cdot v $$
+\end{teorema}
+\begin{proof}
+    Tomando sólo vectores $h$ de la forma $tv$ con $t \in \mathbb{R}$, tenemos que
+    \[
+    \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0) - tL(v)}{|t|} = 0
+    \]
+    (\text{nótese que} $\|v\| = 1$) con lo que, con el mismo argumento que hemos utilizado al principio de esta sección, obtenemos que
+    \[
+    \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0) - tL(v)}{t} = 0
+    \]
+    y por lo tanto que
+    \[
+    \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0)}{t} = L(v),
+    \]
+    luego $f$ es derivable en $x_0$ en la dirección $v$ y $D_v f(x_0) = L(v)$.
+\end{proof}
+
+\begin{definición}[Diferencial]
+    Para represemtar la función $L$ usaremos la notación $df_{x_0}$, que se llama \textbf{diferencial} de $f$ en $x_0$. \\
+\end{definición}
+\begin{observación}
+    Cuando $f$ es diferenciable en $x_0$:
+    $$ \frac{\partial f}{\partial x_i}(x_0) = D_{i}f(x_0) = df(x_0)(e_i) = \nabla f(x_0) \cdot e_i $$
+    donde $e_i$ es el vector de dirección en la $i$-ésima coordenada. 
+\end{observación}
+
+\begin{corolario}
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}$ una aplicación diferenciable en un punto $x_0 \in A$ tal que $\nabla f(x_0) \neq 0$ . Entonces el valor máximo de $|D_vf(x_0)|$ se alcanza para $v = \frac{\nabla f(x_0)}{\|\nabla f(x_0)\|}$ y ese valor máximo es $\|\nabla f(x_0)\|_2$.
+\end{corolario}
+\begin{proof}
+    Sabemos que la derivada direccional de $f$ en el punto $x_0$ y en la dirección del vector unitario $v$ viene dada por
+    \[
+    D_v f(x_0) = \langle \nabla f(x_0), v \rangle.
+    \]
+    Por la desigualdad de Cauchy-Schwarz, se tiene que
+    \[
+    |\langle \nabla f(x_0), v \rangle| \leq \|\nabla f(x_0)\|_2 \|v\|_2 = \|\nabla f(x_0)\|_2,
+    \]
+    ya que $v$ es unitario ($\|v\|_2 = 1$).
+
+    El valor máximo se alcanza cuando $v$ tiene la misma dirección que $\nabla f(x_0)$, es decir,
+    \[
+    v = \frac{\nabla f(x_0)}{\|\nabla f(x_0)\|_2}.
+    \]
+    En ese caso,
+    \[
+    D_v f(x_0) = \left\langle \nabla f(x_0), \frac{\nabla f(x_0)}{\|\nabla f(x_0)\|_2} \right\rangle
+    = \frac{\|\nabla f(x_0)\|_2^2}{\|\nabla f(x_0)\|_2} = \|\nabla f(x_0)\|_2.
+    \]
+    Por lo tanto, el valor máximo de $|D_v f(x_0)|$ es $\|\nabla f(x_0)\|_2$ y se alcanza precisamente en la dirección del gradiente.
+\end{proof}
+
+\begin{definición}[Espacio afín tangente]
+    Cuando $f$ es diferenciable en $x_0$ llamaremos \textbf{espacio afín tangente} a la gráfica $\{(x,f(x)) : x \in A\} \subset \mathbb{R}^{n+1}$ en el punto $(x_0,f(x_0))$ a
+    $$ T = \{(x,f(x_0)) : \langle \nabla f(x_0), x - x_0\rangle : x\in \mathbb{R}^n\} = \{(x, f(x_0)) + df(x_0)(x - x_0)\}$$
+\end{definición}
+\begin{observación}
+    Los espacis afines tangentes son hiperplanos
+\end{observación}
+
+\begin{observación}
+    El concepto intuitivo de tangencia que tenemos para el caso de curvas en $\mathbb{R}^2$ mantiene también para superficies en $\mathbb{R}^n$ pues si $T$ es el espacio afín tangente a la superficie $\{(x,f(x)) : x \in A\}$ en el punto $(x_0,f(x_0))$, entonces para cada punto $(x, f(x)) : x \in A$ existe un punto $(x, y) \in T$ tal que
+    $$ \lim_{x \to x_0} \frac{f(x) - y}{\|x - x_0\|} = 0 $$
+    basta tomar $y = f(x_0) + \langle \nabla f(x_0), x - x_0\rangle$.
+\end{observación}
+
+
+\begin{teorema}
+    Si $f: A \subset \mathbb{R}^n \to \mathbb{R}$ es diferenciable en un punto $x_0$ entonces $f$ es continua en $x_0$.
+\end{teorema}
+
+\begin{proof}
+    Escribamos 
+    $$f(x) - f(x_0) = f(x) - f(x_0) - \langle \nabla f(x_0), x - x_0\rangle + \langle \nabla f(x_0), x - x_0\rangle$$
+    y consideremos el límite
+    $$ \lim_{x \to x_0} \frac{f(x) - f(x_0) - \langle \nabla f(x_0), (x - x_0) \rangle}{\|x - x_0\|}  = 0 $$
+    resulta que 
+    $$ \exists \|x - x_0\| < \delta_1 \implies \left| f(x) - f(x_0) - \langle \nabla f(x_0), (x - x_0) \rangle \right| \leq \|x - x_0\|$$
+    Dado que por Cauchy-Schwarz $\|\langle \nabla f(x_0), x - x_0 \rangle \| \leq \|\nabla f(x_0)\| \|x - x_0\|$, podemos escribir
+    $$ |f(x) - f(x_0)| < (1 + \|\nabla f(x_0)\|) \|x - x_0\| $$
+    si $\|x - x_0\| < \delta_1$. Luego si dado $\epsilon > 0$ tomamos $\delta = \min\{\delta_1, \frac{\epsilon}{1 + \|\nabla f(x_0)\|}\}$, tenemos que si $\|x - x_0\| < \delta$ entonces $|f(x) - f(x_0)| < \epsilon$.
+\end{proof}
+
+\begin{teorema}
+    Sea $f:A \subset \mathbb{R}^n \to \mathbb{R}$ una aplicación que tiene derivadas parciales en cada punto de $A$. Si para cada $i = 1, \ldots, n$ la función
+    $$df: x \in A \mapsto \frac{\partial f}{\partial x_i}(x)$$
+    es continua en un punto $x_0 \in A$, entonces $f$ es diferenciable en $x_0$ 
+\end{teorema}
+
+\begin{proof}
+    Queremos ver si $$ \lim_{x \to x_0} \frac{f(x) - f(x_0) - \langle \nabla f(x_0), x_0 - x \rangle}{\|x - x_0\|} = 0 $$
+    Sea una función de la forma $\varphi_i(x) = f(x_{0_1}, \ldots, x_{0_{i-1}}, x_i, x_{0_{i+1}}, \ldots, x_{0_n})$ para $i = 1, \ldots, n$ y fijemos el punto $x_0 \in A$ en el que todas las derivadas de $f$ son continua y consideremos un $r > 0$ tal que $B(x_0, r) \subset A$. Entonces, para cada punto $x \in B(x_0, r)$, tenemos que
+    $$f(x) - f(x_0) = f(x_1, \ldots, x_n) - f(x_{0_1}, \ldots, x_{0_n}) = $$
+    $$ = f(x_1, x_2, \ldots, x_n) - f(x_{0_1}, x_2, \ldots, x_n) + $$ $$ + f(x_{0_1}, x_2, \ldots, x_n) - f(x_{0_1}, x_{0_2}, \ldots, x_n) + $$ $$+ \ldots + f(x_{0_1}, x_{0_2}, \ldots, x_n) - f(x_{0_1}, x_{0_2}, \ldots, x_{0_n})$$ $$ = f(x) - \varphi_1(x) + \varphi_1(x) - \varphi_2(x) + \varphi_2(x) + \ldots + \varphi_{n}(x) - \varphi_n(x) - f(x_0)$$
+
+    Entonces, apliquemos el Teorema de Valor Medio a $\varphi_1(x)$: $\varphi_1(s) = f(s, x_{0_2}, \ldots, x_{0_n})$ para $s \in [x_{0_1}, x_1]$ es continua y derivable por lo que debe existir un punto $u_1 \in (x_{0_1}, x_1)$ tal que
+    $$\varphi_1(x_1) - \varphi_1(x_{0_1}) = \varphi_1'(u_1)(x_1 - x_{0_1})$$
+    Si $x_1 = x_{0_1}$ pasamos a la siguiente coordenada, pues en esta primerala diferencia es nula. 
+    Pero además tenemos que:
+    $$\varphi_1'(u_1) = \frac{\partial f}{\partial x_1}(u_1, x_{0_2}, \ldots, x_{0_n})$$
+    Por lo que,
+    $$f(x_1, x_2, \ldots,x_n) - f(x_{0_1}, x_2, \ldots, x_n) = D_1f(u_1, x_{0_2}, \ldots, x_{0_n})(x_1 - x_{0_1})$$
+    Repitiendo el proceso, conseguimos la existencia de un vector $u = (u_1, u_2, \ldots, u_n)$ tales que 
+    $$f(x_{0_1}, \ldots, x_{0_{i-1}}, x_i, x_{i+1}, \ldots, x_n) - f(x_{0_1}, \ldots, x_{0_{i-1}}, x_{0_i}, x_{i+1}, \ldots, x_n) = D_if(x_{0_1}, \ldots, x_{0_{i-1}}, u_i,x_{i+1}, \ldots, x_n)(x_i - x_{0_i})$$
+    Tenemos entonces que, 
+    $$f(x) - f(x_0) = \sum_{i = 1}^{n} D_if(x_{0_1}, \ldots, x_{0_{i-1}}, u_i,x_{i+1}, \ldots, x_n)(x_i - x_{0_i})$$
+    Ahora volvamos al límite que queríamos calcular:
+    $$ \lim_{x \to x_0} \frac{f(x) - f(x_0) - \langle \nabla f(x_0), x - x_0 \rangle}{\|x - x_0\|}$$
+    Sustiuyamos la expresión que hemos obtenido para $f(x) - f(x_0)$:
+    $$ \frac{f(x) - f(x_0) - \langle \nabla f(x_0), x - x_0 \rangle}{\|x - x_0\|} = $$ 
+    $$ = \frac{D_1(u_1, \ldots, x_n)(x_1 - x_{0_1}) + \ldots + D_{n}f(x_{0_1}, \ldots, u_n)(x_n - x_{0_n}) - [ D_1f(x_0)(x_1-x_{0_1}) + \ldots + D_nf(x_n)(x_n - x_{0_n})]}{\|x - x_0\|} $$
+    $$ \leq \frac{|D_1f(x_{0_1}, \ldots, u_n)(x_1 - x_{0_1}) - D_1f(x_0)(x_1-x_{0_1})| + \ldots + |D_nf(x_{0_1}, \ldots, u_n)(x_n - x_{0_n}) - D_nf(x_0)(x_n - x_{0_n})|}{\|x - x_0\|}$$
+    $$ \leq \frac{(D_1f(u_1, \ldots, x_n) - D_1f(x_0))(x - x_0)}{\|x - x_0\|} + \ldots + \frac{(D_nf(x_{0_1}, \ldots, u_n) - D_nf(x_0))(x - x_0)}{\|x - x_0\|} = $$
+    $$ = (D_1f(u_1, \ldots, x_n) - D_1f(x_0)) + \ldots + (D_nf(x_{0_1}, \ldots, u_n) - D_nf(x_0)) \xrightarrow{\hspace{0.5cm} x \to x_0 \hspace{0.5cm}} 0$$
+\end{proof}
+
+\begin{observación}
+    Si $f: A \subset \mathbb{R}^n \to \mathbb{R}^m$ es tal que $\exists df(x) \forall x \in A$, entonces se puede hablar de la función diferencial $df: A \subset \mathbb{R}^n \to \mathbb{R}^{m\times n}$, que es una aplicación lineal en cada punto $x \in A$ 
+\end{observación}
+
+\begin{definición}[Matriz Jacobiana]
+    Si $f: A \subset \mathbb{R}^n \to \mathbb{R}^m$ es una aplicación diferenciable, entonces la matriz $J_f(x)$ de la función diferencial $df(x)$ se llama \textbf{matriz jacobiana} de $f$ en el punto $x$.
+    Si $f$ tiene derivadas parciales en $x$, entonces la matriz jacobiana es la matriz cuyas entradas son las derivadas parciales de $f$ en $x$:
+    $$ J_f(x) = \begin{pmatrix}
+        \frac{\partial f_1}{\partial x_1}(x) & \frac{\partial f_1}{\partial x_2}(x) & \cdots & \frac{\partial f_1}{\partial x_n}(x) \\
+        \frac{\partial f_2}{\partial x_1}(x) & \frac{\partial f_2}{\partial x_2}(x) & \cdots & \frac{\partial f_2}{\partial x_n}(x) \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \frac{\partial f_m}{\partial x_1}(x) & \frac{\partial f_m}{\partial x_2}(x) & \cdots & \frac{\partial f_m}{\partial x_n}(x)
+    \end{pmatrix}$$
+    donde $f = (f_1, f_2, \ldots, f_m)$ y $x = (x_1, x_2, \ldots, x_n)$.
+\end{definición}
+
+\begin{observación}
+    Para aplicaciones lineales $L: \mathbb{R}^n \to \mathbb{R}^m$, se verifica que existe $C > 0$ tal que
+    $$ \|L(x)\| \leq C\|x\| \quad \forall x \in \mathbb{R}^n $$
+\end{observación}
+\begin{proposición}[Propiedades de la matriz jacobiana]
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}^m$ una aplicación diferenciable. Entonces:
+    \begin{enumerate}
+        \item $d(f + g)(x_0) = df(x_0) + dg(x_0)$ para $f, g: A \subset \mathbb{R}^n \to \mathbb{R}^m$ diferenciables en $x_0$.
+        \item $d(\alpha f)(x_0) = \alpha df(x_0)$ para $\alpha \in \mathbb{R}$ y $f: A \subset \mathbb{R}^n \to \mathbb{R}^m$ diferenciable en $x_0$.
+        \item $d(f \cdot g) = g(x_0) df(x_0) + f(x_0) dg(x_0)$ para $f, g: A \subset \mathbb{R}^n \to \mathbb{R}$ diferenciables en $x_0$.
+    \end{enumerate}
+\end{proposición}
+
+\begin{teorema}
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}^m$ una aplicación diferenciable en un punto de $x_0 \in A$. Entonces existen constantes $M > 0$ y $\delta > 0$ tales que
+    $$ \|x - x_0\| < \delta \implies \|f(x) - f(x_0) \| \leq M \|x - x_0\| $$
+    En particular, esto implica la continuidad de $f$ en $x_0$.
+\end{teorema}
+\begin{proof}
+    Dado que $f$ es diferenciable se cumple que:
+    $$\lim_{x \to x_0} \frac{f(x) - f(x_0) - df(x_0)(x - x_0)}{\|x - x_0\|} = 0$$
+    Sea $\epsilon = 1 \implies \exists \delta_1 > 0$ tal que si $\|x - x_0\| < \delta_1$ entonces
+    $$0 < \|x - x_0\| < \delta_1 \implies \left|f(x) - f(x_0) - df(x_0)(x - x_0) \right| < \|x - x_0\|$$
+    Con lo que 
+    $$f(x) - f(x_0) = df(x_0)(x- x_0) + \left[f(x) - f(x_0) - df(x_0)(x -x_0)\right] \implies$$
+    $$|f(x) - f(x_0)| = |df(x_0)(x- x_0) + \left[f(x) - f(x_0) - df(x_0)(x -x_0)\right]|$$
+    $$\|f(x)-f(x_0)\| \leq \|df(x_0)(x - x_0)\| + \|x - x_0\| \leq |df(x_0)(x- x_0)| + |f(x) - f(x_0) - df(x_0)(x - x_0)|$$
+    Pero por la hipótesis tenemos que 
+    $$|f(x) - f(x_0) - df(x_0)(x - x_0)| < \|x - x_0\|$$
+    Entonces $$\|f(x) - f(x_0)\| \leq |df(x_0)(x- x_0)| + \|x - x_0\|$$
+    Pero como $df(x_0)$ es una aplicación lineal, existe una constante $C > 0$ tal que
+    $$\|df(x_0)(x - x_0)\| \leq C \|x - x_0\|$$
+    Entonces tenemos que $\forall x \in \mathbb{R}^n$ se cumple que
+    $$\|f(x) - f(x_0)\| \leq M\|x -x_0\|$$
+    para los $x$ tales que $\|x - x_0\| < \delta_1$, donde $M = C + 1$.
+\end{proof}
+
+\begin{teorema}[Regla de la cadena]
+    Sea $A, \subset \mathbb{R}^n$ y $B \subset \mathbb{R}^m$ abiertos y $f: A \to \mathbb{R}^m$ y $g: B \to \mathbb{R}^p$ tales que $f(A) \subset B$, f es diferenciable en $x_0 \in A$ y $g$ es diferenciable en $f(x_0)$. Entonces $g \circ f$ es diferenciable en $x_0$ y
+    $$ d(g \circ f)(x_0) = dg(f(x_0)) \circ df(x_0) $$
+    A nivel de matrices, ésto es equivalente a que
+    $$ J_{g \circ f}(x_0) = J_g(f(x_0)) \cdot J_f(x_0) $$
+\end{teorema}
+\begin{proof}
+    Tenemos que 
+    $$ \frac{\|g(f(x)) - g(f(x_0)) - dg(f(x_0)) \circ df(x_0)(x - x_0)\|}{\|x - x_0\|} \leq $$ 
+    
+    $$\leq \frac{\|g(f(x)) - g(f(x_0)) - dg(f(x_0))(f(x) - f(x_0))\|}{\|x - x_0\|} + \frac{\|dg(f(x_0))(f(x) - f(x_0) - df(x_0)(x - x_0))\|}{\|x - x_0\|}$$
+    Al ser $f$ diferenciable en $x_0$ por el teorema anterior, $M > 0$ y $\delta_1 > 0$ tales que 
+    $$ \|x - x_0\| < \delta_1 \implies \|f(x) - f(x_0)\| \leq M\|x - x_0\|$$
+    Por otra parte tenemos que al ser $g$ diferenciable en $f(x_0)$, dado $\frac{\epsilon}{2M} > 0$ existe $\delta_2 > 0$ tal que
+    $$0 < \|y - f(x_0)\| < \delta_2 \implies \frac{\|g(y) - g(f(x_0)) - dg(f(x_0))(y - f(x_0))\|}{\|y - f(x_0)\|} < \frac{\epsilon}{2M}$$
+    Y esto se cumple $\forall y \in B$, en particular para $y = f(x)$. \\
+    Tomando $delta_3 = \min\{\delta_1, \delta_2\}$ tenemos que
+    $$ 0 < \|x - x_0\| < \delta_3 \implies \frac{\|g(f(x)) - g(f(x_0)) - dg(f(x_0))(f(x) - f(x_0))\|}{\|x - x_0\|} = $$ 
+    $$= \frac{\|g(f(x)) - g(f(x_0)) -dg(f(x_0))(f(x) - f(x_0))\| \|f(x) - f(x_0)\|}{\|x - x_0\| \|f(x) - f(x_0)\|} \leq \frac{\epsilon}{2M} \cdot \frac{\|f(x) - f(x_0)\|}{\|x - x_0\|} \leq \frac{\epsilon}{2M} \cdot M = \frac{\epsilon}{2}$$
+    Además, por ser $dg(f(x_0))$ una aplicación lineal, existe $C^* > 0$ tal que $\|dg(f(x_0))(y)\| \leq C^* \|y\|$ para todo $y \in \mathbb{R}^m$. \\\\Además, por ser $f$ diferenciable en $x_0$, existe $\delta_4 > 0$ tal que 
+    $$ 0 < \|x - x_0\| < \delta_4 \implies \frac{\|f(x) - f(x_0) - df(x_0)(x - x_0)\|}{\|x - x_0\|} < \frac{\epsilon}{2C^*} \implies$$
+
+    $$\frac{\|df(x_0)\left[f(x) - f(x_0)- df(x_0)(x -x_0)\right]\|}{\|x - x_0\|} \leq \frac{C^* \cdot \|f(x) - f(x_0) - df(x_0)(x - x_0)\|}{\|x - x_0\|} \leq \frac{C^*}{2} \cdot \frac{\epsilon}{C^*} = \frac{\epsilon}{2}$$
+
+    Tomando $\delta = \min\{\delta_3, \delta_4\}$ y tomando $x$ tales que $0 < \|x - x_0\| <\delta$ resulta que 
+    $$\frac{\|g(f(x)) - g(f(x_0)) - dg(f(x_0)) \circ df(x_0)(x - x_0)\|}{\|x - x_0\|} \leq$$
+    $$ \leq \frac{\| g(f(x)) - g(f(x_0)) - dg(f(x_0))(f(x) - f(x_0))\|}{\|x - x_0\|} + \frac{\|dg(f(x_0))(f(x) - f(x_0) - df(x_0)(x - x_0))\|}{\|x - x_0\|} < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$$
+\end{proof}
+
+\begin{definición}[Convexidad]
+    Se dice que un subconjunto $S \subset \mathbb{R}^n$ es convexo si para todo par de puntos $x, y \in S : x \neq y$ se verifica que el segmento $L[x, y] = \{x + t(y- x) : t \in [0,1]\} = \{xt+ y(t- 1) : t \in [0,1]\}$ de extremos x e y está contenido en $S$
+\end{definición}
+
+\begin{observación}
+    Las bolas son conjuntos convexos con lo que $L[x, y] \subset B(x_0, r)$ 
+\end{observación}
+
+\begin{teorema}[Teorema del Valor Medio]
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}^m$ una aplicación diferenciable en cada punto de $A$. Entonces para todo $x, y \in A$ tales que $L[x, y] \subset A$ y para todo $z \in \mathbb{R}^m$ se verifica que existe $c \in L[x, y]$ tales que: 
+    $$\langle z, f(y) - f(x) \rangle = \langle z, df(c)(y - x) \rangle$$
+    En principio, $c$ depende de $x, y, z$ 
+\end{teorema}
+\begin{proof}
+    Como $A$ es abierto $\implies \exists \delta > 0 : (1 - t)x + ty \in A \forall t \in [-\delta, \delta + 1]$. \\
+    Fijemos $z \in \mathbb{R}^m$ un vector cualquiera, definamos la función
+    $$\varphi(t) = \langle z, f((1 - t)x + ty) \rangle : t \in (-\delta, \delta + 1)$$
+    Esta función es derivable en $(-\delta, \delta + 1)$ y 
+    $$\varphi'(t) = \langle z, df((1 - t)x + ty)((y - x)) \rangle$$
+    pues 
+    $$\varphi(t) = z_1 f_1((1 - t)x + ty) + z_2 f_2((1 - t)x + ty) + \ldots + z_m f_m((1 - t)x + ty)$$
+    téngase en cuenta que se trata de la diferencial de la composicion de $f$ con la función lineal $g(t) = (1 - t)x + ty$. Luego por el Teorema del Valor Medio para funciones en $\mathbb{R}$ existe $s \in (0,1)$ tal que 
+    $$\varphi(1) - \varphi(0) = \varphi'(s)(1 - 0)$$
+    de donde se sigue que:
+    $$ \langle z, f(y) - f(x) \rangle = \langle z, f(y) \rangle - \langle z, f(x) \rangle = \varphi(1) - \varphi(0) = \varphi'(s) = \langle z, df((1 - s)x + sy)(y - x) \rangle = \langle z, df(c)(y - x) \rangle$$
+    Basta tomar $c = (1 - s)x + sy$ para concluir la demostración. 
+\end{proof}
+
+\begin{teorema}[Teorema del valor medio para funciones $\mathbb{R}^n \to \mathbb{R}$]
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}$ una función diferenciable en cada punto de $A$. Entonces para todo $x, y \in A$ tales que $L[x, y] \subset A$ existe $c \in L[x, y]$ tales que
+    $$f(y) - f(x) = df(c)(x - y)$$    
+\end{teorema}
+\begin{proof}
+    Como en este caso $m = 1$ si tomamos $z = 1$ el resultado se sigue directamente del Teorema del Valor Medio anterior, pues
+    $$f(y) - f(x) = \langle 1, f(y) - f(x) \rangle = \langle 1, df(c)(y - x) \rangle = df(c)(y - x)$$
+\end{proof}
+
+\begin{teorema}[Desigualdad del valor medio para aplicaciones de $\mathbb{R}^n \to \mathbb{R}^m$ o Teorema de los incrementos finitos]
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}^m$ una aplicación diferenciable en $A$. Entonces para todo $x, y \in A$ tales que $L[x, y] \subset A$ se verifica que
+    $$\|f(y) - f(x)\| \leq \sup_{c \in L[x, y]} \|df(c)\| \cdot \|(y - x)\|$$
+\end{teorema}
+\begin{proof}
+    Sea $x, y \in A : L[x, y] \subset A$ y sea $z = \frac{f(y) - f(x)}{\|f(y) - f(x)\|}$, vector unitario. Por el Teorema del Valor Medio para funciones de $\mathbb{R}^n \to \mathbb{R}$, existe $c \in L[x, y]$ tal que
+    $$\langle z, f(y) - f(x) \rangle = \langle z, df(c)(y - x) \rangle$$
+    De donde se sigue que 
+    $$\|f(y) - f(x)\| = \frac{\|f(y) - f(x)\|^2}{\|f(y) - f(x)\| } = \langle \frac{f(y) - f(x)}{\|f(y) - f(x)\|}, f(y) - f(x) \rangle = \langle \frac{f(y) - f(x)}{\|f(y) - f(x)\|}, df(c)(y - x) \rangle \leq$$
+    $$\leq \|\frac{f(y) - f(x)}{\|f(y) - f(x)\|}\| \|df(c)(y - x)\| = \|df(c)(y- x)\| \leq \|df(c)\| \cdot \|y - x\| \leq \sup_{c \in L[x, y]} \|df(c)\| \cdot \|(y - x)\|$$
+\end{proof}
+
+\begin{teorema}
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}^m$ una aplicación diferenciable en $A$. Entonces para todo $x, y \in A$ tales que $L[x, y] \subset A$ se verifica que
+    $$f_j(y) - f_j(x) = df_j(c_j)(y - x)$$
+    para algún $c_j \in L[x, y]$ y para cada $j = 1, \ldots, m$.
+\end{teorema}
+\begin{corolario}
+    Sea $A \subset \mathbb{R}^n$ abierto y convexoy $f: A \subset \mathbb{R}^m$ es diferenciable en $A$ y $df(x) = 0 \forall x \in A$. Entonces $f$ es constante en $A$.
+\end{corolario}
+\begin{definición}[Derivada parciales segundo]
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}$ una aplicación diferenciable en $A$. Entonces la \textbf{derivada parcial segunda} de $f$ respecto a la variable $x_i$ es
+    $$\frac{\partial^2 f}{\partial x_i^2}(x) = \frac{\partial}{\partial x_i}\left(\frac{\partial f}{\partial x_i}(x)\right)$$
+    y la \textbf{derivada parcial mixta} de $f$ respecto a las variables $x_i$ y $x_j$ es
+    $$\frac{\partial^2 f}{\partial x_i \partial x_j}(x) = \frac{\partial}{\partial x_j}\left(\frac{\partial f}{\partial x_i}(x)\right)$$
+\end{definición}
+
+\begin{definición}[Clase $C^1$]
+    Sea $A \subset \mathbb{R}^n$ un conjunto abierto. Una aplicación $f: A \to \mathbb{R}$ se dice que es de clase $C^1$ si tiene derivadas parciales en cada punto de $A$ y estas son continuas en $A$. Si $f: A \to \mathbb{R}^m$ es una aplicación de clase $C^1$, entonces se dice que es de clase $C^1$ si cada componente $f_i$ es de clase $C^1$.
+\end{definición}
+
+\begin{definición}[Clase $C^2$]
+    Sea $A \subset \mathbb{R}^n$ un conjunto abierto. Una aplicación $f: A \to \mathbb{R}$ se dice que es de clase $C^2$ si tiene derivadas parciales de orden 2 en cada punto de $A$ y estas son continuas en $A$. Si $f: A \to \mathbb{R}^m$ es una aplicación de clase $C^2$, entonces se dice que es de clase $C^2$ si cada componente $f_i$ es de clase $C^2$.
+\end{definición}
+
+\begin{definición}[Clase $C^p$]
+    Sea $A \subset \mathbb{R}^n$ un conjunto abierto. Una aplicación $f: A \to \mathbb{R}$ se dice que es de clase $C^p$ si tiene derivadas parciales de orden $k$ en cada punto de $A$ y estas son continuas en $A$ para todo $k = 1, \ldots, p$. Si $f: A \to \mathbb{R}^m$ es una aplicación de clase $C^p$, entonces se dice que es de clase $C^p$ si cada componente $f_i$ es de clase $C^p$.
+\end{definición}
+
+\begin{lema}
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}$ una función de clase $C^2$. Fijado $x_0 \in A$ sea $\delta > 0$ tal que $B(x_0, \delta) \subset A$. Entonces para cada $u$ y $v \in B(0, \frac{\delta}{2}) \setminus \{0\}$ existen $\alpha, \beta \in (0,1)$ talesque
+    $$f\bigl(x_{0} + u + v\bigr) \;-\; f\bigl(x_{0} + u\bigr) \;-\; \bigl(f\bigl(x_{0} + v\bigr) - f(x_{0})\bigr)
+    \;=\; D_{v}\bigl(D_{u}f\bigr)\bigl(x_{0} + \alpha\,u + \beta\,v\bigr). $$
+\end{lema}
+\begin{proof}
+    Consideremos la función
+    $$g: B(0, \frac{\delta}{2}) \to \mathbb{R}$$
+    $$g(x) = f(x + v) - f(x)$$
+    Esta funcion $g$ es diferenciable en $B(x_0, \frac{\delta}{2})$ y $dg(x) = df(x + v) - df(x)$. Apliquemos el teorema del valor medio a $g$ en el segmento $L[x_0, x_0 + u]$ y obtenemos la existencia de un punto $c$ entre $x_0$ y $x_0 + u$ tal que
+    $$g(x_0 + u) - g(x_0) = dg(c)(u)$$
+    Esto es, 
+    $$f(x_0 + u + v) - f(x_0 + u) - (f(x_0 + v) - f(x_0)) = (df(c + v) - df(c))(u)$$
+    Si escribirmos $c = x_0 + \alpha u$ para algún $\alpha \in (0,1)$, tenemos que
+    $$f(x_0 + u + v) - f(x_0 + u) - (f(x_0 + v) - f(x_0)) = (df(x_0 + \alpha u + v) - df(x_0 + \alpha u))(u) = D_uf(x_0 + \alpha u + v) - D_uf(x_0 + \alpha u)$$
+    Ahora como $D_uf$ es diferenciable en $A$ y $L[x_0 + \alpha u, x_0 + \alpha u + v] \subset A$, aplicamos el teorema del valor medio a $D_uf$ y nos da que existe un punto $e \in L[x_0 + \alpha u, x_0 + \alpha u + v]$ tal que
+    $$D_uf(x_0 + \alpha u + v) - D_uf(x_0 + \alpha u) = d(D_uf(e))(v) = D_{v}(D_uf)(e)$$
+    Si escribimos $e = x_0 + \alpha u + \beta v$ para algún $\beta \in (0,1)$, tenemos el resultado
+\end{proof}
+
+\begin{teorema}[Teorema de Schwarz]
+    Sea $A \subset \mathbb{R}^n$ un abierto y $f \in C^2(A)$, entonces $D_{ij}f(x) = D_{ji}f(x)$ para todo $x \in A$ y para todo $i, j = 1, \ldots, n$. 
+\end{teorema}
+\begin{proof}
+    Sea $x_0 \in A$. Probaremos que $\forall \epsilon > 0 |D_{ij}f(x_0) - D_{ji}f(x_0)| < \epsilon$. Como $D_{ij}f$ y $D_{ji}f$ son continuas en $x_0$, existe $\delta > 0$ tal que $B(x_0, \delta) \subset A$ y 
+    $$\|x -x_0\| < \delta \implies \begin{cases}
+        |D_{ij}f(x) - D_{ij}f(x_0)| < \epsilon/2 \\
+        |D_{ji}f(x) - D_{ji}f(x_0)| < \epsilon/2
+    \end{cases}$$
+    Tomemos $u = te_i$ y $v = se_j$ con $t, s \in (0, \frac{\delta}{2})$. Tenemos así puntos que están en las condiciones del lema anterior, aplicando ese lema obtenemos que existen $\alpha_1, \beta_1, \alpha_2, \beta_2 \in (0,1)$ tales que
+    $$\begin{cases}
+            f(x_0 + te_i + se_j) - f(x_0 + te_i) - (f(x_0 + se_j) - f(x_0)) = D_{se_j}(D_{te_i}f)(x_0 + \alpha_1 te_i + \beta_1 se_j)\\
+            f(x_0 + se_j + te_i) - f(x_0 + se_j) - (f(x_0 + te_i) - f(x_0)) = D_{te_i}(D_{se_j}f)(x_0 + \alpha_2 se_j + \beta_2 te_i)
+    \end{cases}$$
+    Como en general $D_{\lambda u}f(x) = \lambda D_u f(x)$ y $A = B$, tenemos que 
+    $$st D_{ij}f(x_0 + \alpha_1 te_i + \beta_1 se_j) = ts D_{ji}f(x_0 + \alpha_2 se_j + \beta_2 te_i)$$
+    Entoncesporla desigualdad triangular tenemos que
+    $$|D_{ij}f(x_0) - D_{ji}f(x_0)| \leq |D_{ij}f(x_0) - D_{ij}f(x_0 + \alpha_2 se_j + \beta_2 te_i)| + |D_{ji}f(x_0 + \alpha_2 se_j + \beta_2 te_i) - D_{ji}f(x_0)|$$
+    y tal como habíamos tomado $s$ y $t$ esta suma esmenor que $\epsilon$ pues $\|\alpha_2 s e_j +\beta_2 t e_i\| < s + t < \delta$ y $\|\alpha_1 t e_i + \beta_1 s e_j\| < s + t < \delta$. Por tanto, la arbitrariedad de $\epsilon$ nos da que $D_{ij}f(x_0) = D_{ji}f(x_0)$. 
+\end{proof}
+\begin{observación}
+    \begin{enumerate}
+        \item Si $f$ es de clase $C^1$ y existe $\frac{\partial^2 f}{\partial x \partial y}$ y es continua entonces también existe $\frac{\partial^2 f}{\partial y \partial x}$ y coinciden.
+        \item También se puede obtener la igualdad entre $D_{12}$ y $D_{21}$ a partir de la existencia de $D_1f$ y $D_2f$ en un entorno de $(x_0, y_0)$ y su diferenciabilidad.
+    \end{enumerate}
+\end{observación}
+
+\begin{corolario}
+    Si $f \in C^3(A)$ entonces $D_{ijk}f(x) = D_{\sigma(i), \sigma(j), \sigma(k)}f(x)$ para todo $x \in A$ y toda permutación $\sigma$ de $\{i, j, k\}$.
+\end{corolario}
+\begin{proof}
+    Supongamos que $\sigma$ está dada por $\sigma(i) = k, \sigma(j) = i, \sigma(k) = j$. 
+    \begin{align*}
+    D_{ijk}f(x) 
+        &= D_i(D_j(D_k f))(x) \\
+        &= D_i(D_{jk} f)(x) = D_i(D_{kj} f)(x) \\
+        &= D_i(D_k(D_j f))(x) = D_{ik}(D_j f)(x) = D_{ki}(D_j f)(x) = D_{kij} f(x).
+\end{align*}
+    Las $Dpf$ son de clase $C^2$ y se les puede aplicar el teorema de Schwarz.
+\end{proof}
+
+\begin{teorema}[Teorema de Taylor]
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}$ una función de clase $C^{k+1}$ en $A$ y sean $x_0, \in A$y $h \neq 0$ tales que $L[x_0, x_0 + h] \subset A$. Entonces existe un punto $c \in L[x_0, x_0 + h]$ tal que
+    \begin{align*}
+    f(x_0 + h) &= f(x_0) + \sum_{i_1=1}^n D_{i_1}f(x_0) h_{i_1} \\
+    &\quad + \frac{1}{2!} \sum_{i_1=1}^n \sum_{i_2=1}^n D_{i_1 i_2}f(x_0) h_{i_1} h_{i_2} + \cdots \\
+    &\quad + \frac{1}{k!} \sum_{i_1=1}^n \cdots \sum_{i_k=1}^n D_{i_1 \cdots i_k}f(x_0) h_{i_1} \cdots h_{i_k} \\
+    &\quad + \frac{1}{(k+1)!} \sum_{i_1=1}^n \cdots \sum_{i_{k+1}=1}^n D_{i_1 \cdots i_k i_{k+1}}f(c) h_{i_1} \cdots h_{i_k} h_{i_{k+1}},
+    \end{align*}
+    o equivalentemente usando $h = (x - x_0)$
+    \begin{align*}
+    f(x) &= f(x_0) + \sum_{i_1=1}^n D_{i_1}f(x_0) (x_{i_1} - x_{0 i_1}) \\
+    &\quad + \frac{1}{2!} \sum_{i_1=1}^n \sum_{i_2=1}^n D_{i_1 i_2}f(x_0) (x_{i_1} - x_{0 i_1})(x_{i_2} - x_{0 i_2}) + \cdots \\
+    &\quad + \frac{1}{k!} \sum_{i_1=1}^n \cdots \sum_{i_k=1}^n D_{i_1 \cdots i_k}f(x_0) (x_{i_1} - x_{0 i_1}) \cdots (x_{i_k} - x_{0 i_k}) \\
+    &\quad + \frac{1}{(k+1)!} \sum_{i_1=1}^n \cdots \sum_{i_{k+1}=1}^n D_{i_1 \cdots i_k i_{k+1}}f(c) (x_{i_1} - x_{0 i_1}) \cdots (x_{i_k} - x_{0 i_k})(x_{i_{k+1}} - x_{0 i_{k+1}}).
+    \end{align*}    
+\end{teorema}
+\begin{proof}
+    Sea la aplicación $\varphi:\mathbb{R} \to \mathbb{R}^n$ definida por $\varphi(t) = x_0 + th$. Dado que $\varphi$ es continua entonces $B = \varphi^{-1}(A) \subset \mathbb{R}$ es abierto. \\\\
+    Consideremos la composicion $g =  f \circ \varphi: B \subset \mathbb{R} \to \mathbb{R}$, definida por $g(t) = f(x_0 + th)$, que es de clase $C^{k+1}$ en $B$ (pues es una función polinómica y por tanto es $f$ la que restringe la clase). Además se tienq eue $varphi'(t) = h$. Entonces aplicando la regla de la cadena a $\varphi$ obtenemos que: 
+    $$g'(t) = df(\varphi(t)) \circ d\varphi(t) = \sum_{i_1 = 1}^{n} \frac{\partial f}{\partial x_{i_1}}(\varphi(t)) \cdot \frac{\partial \varphi}{\partial t}(t) = \sum_{i_1 = 1}^{n} D_{i_1}f(\varphi(t)) h_{i_1} = \langle \nabla f(\varphi(t)), h \rangle$$
+    $$ g^{j)} = \sum_{i_1 = 1, \ldots, i_j = 1}^{n} D_{i_1 \ldots i_j}f(\varphi(t)) \cdot h_{i_1} \cdots h_{i_j}$$
+    Si aplicamos nuevamente la regla de la cadena a $\varphi$ obtenemos que: 
+    $$\frac{\partial}{\partial t} \nabla f(\varphi(t)) = H_f(\varphi(t)) \cdot \frac{\partial \varphi}{\partial t}(t) = H_f(\varphi(t)) \cdot h$$
+    Entonces tendríamos que $$g''(t) = \langle \langle H_f(\varphi(t)), h \rangle, h \rangle = H_f(\varphi(t)) \cdot h \cdot h = \sum_{i_1 = 1, i_2 = 1}^{n} \frac{\partial^2 f}{\partial x_{i_1} \partial x_{i_2}}(\varphi(t)) h_{i_1} h_{i_2}$$
+    Entonces por inducción podemos llegar a la derivada $\varphi^{j)}$:
+    $$g^{j)}(t) = \sum_{i_1 = 1, \ldots, i_n = 1}^{n} D_{i_1 \ldots i_j}f(\varphi(t)) h_{i_1} \cdots h_{i_j}$$
+    Podemos aplicar el Teorema de Taylor para una variable una variable real $\varphi$ centrado en $a$: 
+    $$f(x) = \sum_{i = 0}^{k} \frac{f^{i)}(a)(x - a)}{i!}$$
+    Tomando $a = 0$ como centro y $x = 1$ y además tomaremos la f´romula del resto del valor medio del resto $R_k(x) = \frac{f^{k+1}(\alpha)}{(k+1)!}(x - a)^{k+1}$, donde $\alpha \in (0,1)$, entonces tenemos que: 
+    $$g(1) = g(0) + \frac{1}{2!} g''(0) + \cdots + \frac{1}{k!} g^{(k)}(0) + R_k(1) = $$
+    $$ = f(x_0) + \sum_{i_1=1}^n D_{i_1}f(x_0) h_{i_1} + \frac{1}{2!} \sum_{i_1=1}^n \sum_{i_2=1}^n D_{i_1 i_2}f(x_0) h_{i_1} h_{i_2} + \cdots + \frac{1}{k!} \sum_{i_1=1}^n \cdots \sum_{i_k=1}^n D_{i_1 \cdots i_k}f(x_0) h_{i_1} \cdots h_{i_k} + R_k(1)$$
+
+\end{proof}
+\begin{definición}[Extremos relativos y absolutos]
+    Diremos $f: A \subset \mathbb{R}^n$ y $x_0 \in A$. Diremos que $f$ tiene un máximo relativo en $x_0$ si existe $r > 0$ tal que $B(x_0, r) \subset A$ y $f(x) \leq f(x_0)$ para todo $x \in B(x_0, r)$. Si existe una bola centrada en $x_0$ en la $f(x) \leq f(x_0)$ diremos que $f$ tiene un mínimo relativo en $x_0$. Cuando se da alguna de esas desigualdades para todo $x \in A$ diremos que $f$ tiene un máximo absoluto en $x_0$ y un mínimo absoluto en $x_0$.
+\end{definición}
+
+\begin{definición}[Punto crítico]
+    Si $f$ tiene todas las derivadas parciales de primer orden en un punto $x_0$ diremos que $x_0$ es un \textbf{punto crítico} de $f$ si $\nabla f(x_0) = 0$.
+\end{definición}
+
+
+\begin{teorema}
+    Si $f: A \subset \mathbb{R}^n \to \mathbb{R}$ tiene un extremo relativo en $x_0 \in A$ y $f$ tiene todas las derivadas parciales en ese punto entonces $\nabla f(x_0) = 0$.
+\end{teorema}
+\begin{proof}
+    $f$ tiene un máximo relativo en $x_0$, entonces
+    $$\frac{f(x_0 +t e_i) - f(x_0)}{t} \leq 0 \quad \forall t > 0$$
+    Dado que existe el límitede ese cociente, necesariamente tiene que ser 0. 
+\end{proof}
+\begin{definición}[Punto de ensilladura]
+    Los puntos críticos de $f$ que no son ni máximos ni mínimos relativos se denominan \textbf{puntos de ensilladura} o \textbf{puntos de silla}. 
+\end{definición}
+\begin{definición}[Matriz hesiana]
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}$ una función de clase $C^2$ en $A$. Entonces la \textbf{matriz hesiana} de $f$ en un punto $x_0 \in A$ es la matriz cuadrada de orden $n$ cuyas entradas son las derivadas parciales segundas de $f$:
+    $$H_f(x_0) = \begin{pmatrix}
+        D_{11}f(x_0) & D_{12}f(x_0) & \cdots & D_{1n}f(x_0)\\
+        D_{21}f(x_0) & D_{22}f(x_0) & \cdots & D_{2n}f(x_0)\\
+        \vdots & \vdots & \ddots & \vdots\\
+        D_{n1}f(x_0) & D_{n2}f(x_0) & \cdots & D_{nn}f(x_0)
+    \end{pmatrix}$$
+\end{definición}
+
+\begin{definición}[Definición de signo]
+    Se dice que una forma cuadrática $Q: \mathbb{R}^n \to \mathbb{R}$ es \textbf{definida positiva} si $Q(x) > 0$ para todo $x \neq 0$. Se dice que es \textbf{definida negativa} si $Q(x) < 0$ para todo $x \neq 0$. Se dice que es \textbf{indefinida} si no es ni positiva ni negativa.
+    Se dice que una forma cuadrática es \textbf{semidefinida positiva} si $Q(x) \geq 0$ para todo $x \in \mathbb{R}^n$. Se dice que es \textbf{semidefinida negativa} si $Q(x) \leq 0$ para todo $x \in \mathbb{R}^n$.
+\end{definición}
+\begin{teorema}
+    Sea $f$ una función de clase $C^2$ en un abierto de $\mathbb{R}^n$ y supongamos que un punto $x_0$ de él es un punto crítico para $f$.
+    \begin{itemize}
+        \item[(a)] Si la forma cuadrática $Q$ asociada a $H_f(x_0)$ es definida negativa, entonces $f$ tiene en $x_0$ un máximo relativo.
+        \item[(b)] Si $f$ tiene un máximo relativo en $x_0$, entonces $Q$ es semidefinida negativa.
+        \item[(c)] Si $Q$ es definida positiva, entonces $f$ tiene en $x_0$ un mínimo relativo.
+        \item[(d)] Si $f$ tiene un mínimo relativo en $x_0$, entonces $Q$ es semidefinida positiva.
+        \item[(e)] Si $Q$ es indefinida entonces la función tiene un punto de ensilladura en $x_0$.
+    \end{itemize}
+\end{teorema}
+\begin{proof}
+    
+\end{proof}
+
+
