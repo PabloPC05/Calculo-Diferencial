@@ -467,7 +467,180 @@
     \end{itemize}
 \end{teorema}
 \begin{proof}
-    
+    \begin{enumerate}
+        \item[(a)] Como el conjunto $K = \{x \in \mathbb{R}^n : \|x\| = 1\}$ es un conjunto compacto y por tanto acotado, existe $\tilde{x} \in K$ tal que
+        $$Q(\tilde{x}) \geq Q(x) \quad \forall x \in K$$
+        Ya que al ser $Q$ una aplicación continua y $K$ un compacto, en él debe alcanzar un máximo. Por otro lado al ser $Q$ definida negativa, tenemos que $Q(\tilde{x}) < 0$, por tanto, sea $\epsilon_0 = -Q(\tilde{x})$. 
+        Tenemos que por la continuidad de las segundas derivadas de $f$ en $x_0$, existe $\delta > 0$ tal que $B(x_0, \delta) \subset A$ y 
+        $$\|x - x_0\| < \delta \implies |D_{ij}f(x) - D_{ij}f(x_0)| < \frac{\epsilon_0}{2n^2} \quad \forall i, j = 1, \ldots, n$$
+        Por otra parte, para $h \in \mathbb{R}^n : h \neq 0$ se verifica que: 
+        $$Q(h) = \|h\|^2 Q(\frac{h}{\|h\|}) \leq \|h\|^2 Q(\tilde{x}) = -\epsilon_0 \|h\|^2$$
+        Apliquemos ahora el Teorema de Taylor, hasta el grado 1, y obtengamos un $c \in L[x_0, x_0 + h]$ para el resto tal que
+        $$f(x_0 + h) - f(x_0) = \frac{1}{2} \sum_{i, j = 1}^{n} D_{ij}f(c) h_i h_j = $$
+        Nota: Las primeras derivadas son nulas pues es un punto crítico. \\\\
+        $$ = \sum_{i, j = 1}^{n} D_{ij}f(c)h_i h_j + D_{ij}f(x_0)h_i h_j - D_{ij}f(x_0)h_i h_j = \sum (D_{ij}f(c) - D_{ij}f(x_0))h_i h_j + D_{ij}f(x_0)h_i h_j = $$
+        $$ = \sum_{i, j = 1}^{n} (D_{ij}f(c) - D_{ij}f(x_0))h_i h_j + Q(h)$$
+        Si tomamos la cota de la continuidad anterior y lo aplicamos a $c$, tenemos que: 
+        $$ \|c - x_0 \| \leq \|x_0 + h - x_0\| = \|h\| < \delta \implies |D_{ij}f(c) - D_{ij}f(x_0)| < \frac{\epsilon_0}{2n^2}$$
+        Con lo que obtenemos que: 
+        $$ \sum_{i, j =1}^{n} (D_{ij}f(c) - D_{ij}f(x_0))h_i h_j < \frac{\epsilon_0}{2} \|h\|^2$$
+        Además, como por otra parte tenemos que 
+        $$Q(h) \leq -\epsilon_0 \|h\|^2$$ 
+        Obtenemos finalmente que
+        $$f(x_0 + h) - f(x_0) = \frac{1}{2} \sum_{i, j =1}^{n} D_{ij}f(x)h_i h_j \leq \frac{1}{2} (-\epsilon_0 + \frac{\epsilon_0}{2}) \|h\|^2 < 0$$
+        Entonces obtenemos que $f(x) < f(x_0) \forall x \in B(x_0, \delta)$ y finalmente que $f$ tiene un máximo local en $x_0$. 
+        \item[(b)] Demostremos esto por medio del absurdo: \\
+        Si existe $h_0$ tal que $Q(h_0) > 0$ consideremos la función $g(t) = -f(x_0 + th_0) = -f(\varphi(t))$ siendo $\varphi(t) = x_0 + th_0$. Se verific que $q$ es de clase $C^2$ en un intervalo centrado en $0$
+        $$g'(t) = - (f \circ \varphi)'(t) = -\sum_{i = 1}^{n} D{i}f(x_0 + th_0)h_{0_i} = - \sum_{i = 1}^{n} (D_if \circ \varphi)(t)h_{0_i} = \langle \nabla f(x_0 + th_0), h_0 \rangle$$
+        $$g''(t) = - (f \circ \varphi)''(t) = - \sum_{i = 1}^{n} (D_if \circ \varphi)'(t)h_{0_i} = - \sum_{i = 1}^{n} \left(\sum_{j = 1}^{n} D_{j}(D_{i}f)(\varphi(t))h_{0_j}\right)h_{0_i}$$
+        Entones, cómo $g'(0) = 0$ (por ser un punto crítico) y $g''(0) = -Q(h_0) < 0$, tenemos que $g$ es cóncava hacia abajo, entonecs $g$ decrece cerca de $t = 0 \implies$
+        $$-f(x_0 + th_0) < -f(x_0) \quad \forall t \in (-\delta, \delta)$$
+        por lo que $f$ no tendría un máximo local en $x_0$. 
+    \end{enumerate}
 \end{proof}
 
+\begin{teorema}
+    Sea $f: A \subset \mathbb{R}^2 \to \mathbb{R}$ un función de clase $C^2$ y $(x_0, y_0) \in A$ un punto crítico e $f$ y sea $\Delta = det(H_{f}(x_0, y_0)) = ac - b^2$, tenemos que: 
+    \begin{enumerate}
+        \item Si $\Delta > 0$ y $a > 0$ entonces $f$ tiene un mínimo relativo en $(x_0, y_0)$
+        \item Si $\Delta > 0$ y $ a < 0$ entonces $f$ tiene un máximo relativo en $(x_0, y_0)$
+        \item Si $\Delta < 0$ entonces $f$ tiene un punto de silla en $(x_0, y_0)$
+        \item Si $\Delta = 0$ entonces no se sabe nada
+    \end{enumerate}
+\end{teorema}
+\begin{proof}
+    Para la forma cuadrática $Q$ asociada a $H_f(x_0, y_0)$ se verifica que: 
+    $$Q(h_1, h_2) = ah_1^2 + 2bh_1h_2 + ch_2^2 $$
+    Si $\Delta > 0$ entonces $a \neq 0$ pues $\Delta = ac - b^2$ por lo que: 
+    $$Q(h_1, h_2) = ah_1^2 + 2bh_1h_2 + ch_2^2 = a \left(h_1 + \frac{b}{a}h_2\right)^2 + \frac{\Delta}{a}h_2^2$$
+    \begin{enumerate}
+        \item Si $a > 0 \implies Q(h_1, h_2) > 0 \quad \forall h \in \mathbb{R}^2 \implies f$ tiene un mínimo relativo en $(x_0, y_0)$.
+        \item Si $a < 0 \implies Q(h_1, h_2) < 0 \quad \forall h \in \mathbb{R}^2 \implies f$ tiene un máximo relativo en $(x_0, y_0)$.
+        \item Si $\Delta < 0$, haremos una distinción de casos: 
+        \begin{enumerate}
+            \item $a = 0 \implies Q(h_1, h_2) = 2bh_1h_2 + ch_2^2$, y tendríamos que $b \neq 0$ pues si $b = 0$ y $a = 0$ tendríamos que $\Delta = 0$ y hacemos nuevamente distinción de casos: 
+            \begin{enumerate}
+                \item $c = 0 \implies Q(h_1, h_2) = 2bh_1h_2 \implies \begin{cases}
+                    Q(1, 1) = 2b \\
+                    Q(1, -1) = -2b
+                \end{cases}$
+                \item $c \neq 0 \implies Q(h_1, h_2) = 2bh_1h_2 + ch_2^2 \implies \begin{cases}
+                    Q(\frac{-c}{b}, 1) = -c \\
+                    Q(\frac{-c}{4b}, 1) = \frac{c}{2}            
+                \end{cases}$
+            \end{enumerate}
+            Estos dos casos nos dan que $Q$ toma valores opuestos en diferentes puntos, es decir, $Q$ es indefinida
+        \end{enumerate}
+        \item $a \neq 0 \implies \begin{cases}
+            Q(1, 0) = a \\
+            Q(\frac{-b}{a}, 1) = \frac{\Delta}{a} < 0
+        \end{cases} \implies$ $Q$ toma valores opuestos en diferentes puntos, es decir, $Q$ es indefinida.
+        \item Ni podemos decir nada pues depende de cada caso particular
+    \end{enumerate}
+\end{proof}
 
+\begin{teorema}[Criterio de Sylvester]
+    \begin{enumerate}
+        \item Si $\Delta_k > 0 \quad \forall k = 1, \ldots, n$ y $f$ tiene un mínimo relativo en $x_0$ 
+        \item Si $(-1)^k \Delta_k > 0 \quad \forall k = 1, \ldots, n$ y $f$ tiene un máximo relativo en $x_0$
+        \item Si $\Delta \neq 0$ entonces no hay extremo
+    \end{enumerate}
+\end{teorema}
+
+\begin{observación}
+    Las funcionesdemásdeunavariablepuedentenerun único punto crítico y éstepuedeser un extremo relativo y no absoluto. Por ejemplo, la función$$f(,y) =y^2 +x^2(1+ y)^3$$
+    tiene un único punto crítico en $(0, 0)$ y es un mínimo relativo pero no absoluto, ya que $f(0,0) = 0$ y $f(1, -4) = -9$
+\end{observación}
+
+\begin{proposición}
+    Sea $f: U \subset \mathbb{R}^n \to \mathbb{R}^n$ k-lipschitz con $k \in (0,1) \iff \forall x, y \in U \implies \|f(x) - f(y)\| \leq k \|x - y\|$. \\
+    Entonces, la función $g = id +f$ es un homeomorfismo de $U$ en $V$-abierto de $\mathbb{R}^n$
+    $$g: U \to V$$
+    $$g^{-1}: V \to U$$
+\end{proposición}
+
+\begin{teorema}
+    Sea $f: \overline{B(x_0, r)} \subset \mathbb{R}^n \to \mathbb{R}^n$ es una aplicación continua en $\overline{B(x_0, r)}$ y y difereniable en $B(x_0, r)$. Si $det(J_f(x)) \neq 0$ para todo $x \in B(x_0, r)$ y $f(x) \neq f(x_0) \forall x : \|x - x_0\| = r$, entonces $f(x_0)$ es un punto interior de $f(B(x_0, r))$
+\end{teorema}
+\begin{proof}
+    Consideremos la función
+    $$\varphi: x \in \overline{B(x_0, r)} \subset \mathbb{R}^n \mapsto \varphi(x) = \|f(x) - f(x_0)\|$$
+    Como $\varphi$ es continua (ya que $f$ es continua en la bola) y como la frontera de la bola es compacta, entonces $\exists x^* \in \{x : \|x -x_0\| = r\}$ tal que: 
+    $$\varphi(x^*) = \min_{x \in \partial B(x_0, r)} \{ \|f(x)-f(x_0)\|\}$$
+    Entonces, como $f(x) \neq f(x_0) \forall x \in \partial B(x_0, r)$, tenemos que $\varphi(x^*) > 0$. 
+    Ahora beamos que $B(f(x_0), \frac{m}{2}) \subset f(B(x_0, r))$: \\
+    Fijado un $y \in B(f(x_0), \frac{m}{2})$, tomemos la función auxiliar:
+    $$\psi: x \in \overline{B(x_0, r)} \subset \mathbb{R}^n \mapsto \psi(x) = \|f(x) - y\|$$
+    $\psi$ es continua en el compacto $\overline{B(x_0, r)}$ por lo que existe $x^{**} \in \overline{B(x_0, r)}$ tal que $\psi(x^{**}) = \min_{x \in \overline{B(x_0, r)}} \{ \|f(x) - y\|\}$. Ahora veremos que: 
+    \begin{itemize}
+        \item 
+    \end{itemize}
+\end{proof}
+
+\begin{corolario}
+    Sea $f:A \subset \mathbb{R}^n \to \mathbb{R}^n$ una aplicación de clase $C^1(A)$ y supongamos que $f$ es inyectiva y que $det(J_f(x)) \neq 0$ para todo $x \in A$. Entonces $f$ es unaaplicación abierta.
+\end{corolario}
+
+\begin{proposición}
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}^n$ una aplicación de clase $C^1$ en el abierto de $A$ y supongamos que para un punto $x_0 \in A$ se verifica que $det(J_f(x_0)) \neq 0$. Entonces, $\exists r > 0$ tal que $B(x_0, r) \subset A$, $f$ es inyectiva en $B(x_0, r)$ y $det(J_f(x)) \neq 0 \forall x \in B(x_0, r)$
+\end{proposición}
+
+\begin{teorema}[Teorema de la función inversa]
+    Sea $f: A \to \mathbb{R}^n \in C^1(A, \mathbb{R}^n)$ y supongamos que $x_0 \in A$ se verifica que $det(J_f(x_0)) \neq 0$. Entonces existen entornos abiertos $U$ de $x_0$ y $V$ de $f(x_0)$ y una única aplicación $g: V \subset \mathbb{R}^n \to U \subset \mathbb{R}^n$ tal que:
+    \begin{enumerate}
+        \item $f(U) = V$
+        \item $f$ es inyectiva en $U$
+        \item $g \circ f = Id$ en $U$
+        \item $g \in C^1(V, \mathbb{R}^n)$
+    \end{enumerate}
+\end{teorema}
+
+\begin{teorema}[Tereoma de la función implícita]
+    Sea $F: A \subset \mathbb{R}^n \times \mathbb{R}^k \to \mathbb{R}^n$ una aplicación de clase $C^1$ en $A$-abierto y supongamos que paratodopunto $(x_0, y_0) \in A$ se verifica que $F(x_0, y_0) = 0$ y que $J_yF(x_0, y_0) \neq 0$. Entonces existen entornos abiertos $Y_0$ de $y_0$ y una única aplicación $G: Y_0 \subset \mathbb{R}^k \to \mathbb{R}^n$ tal que:
+    \begin{enumerate}
+        \item $G \in C^1(Y_0, \mathbb{R}^n)$
+        \item $G(y_0) = x_0$
+        \item $F(G(y), y) = 0 \quad \forall y \in Y_0$
+        \item Existe un entorno $U \subset A$ de $(x_0, y_0)$ tal que: 
+        $$\{(x, y) \in : F(x,y) = 0\}= \{(G(y), y) : y \in Y_0\}$$
+    \end{enumerate}
+\end{teorema}
+
+\begin{definición}[Puntos regulares]
+    Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}^k$ siendo $A$ un abierto, un punto $x_0$ es un punto regular si $f$ es de clase $C^1$ en un entorno abierto de $x_0$  la matriz jacobiana de $f$ en $x_0$ es de rango máximo
+\end{definición}
+
+\begin{definición}[Variedad regular]
+    Se llama \textbf{variedad regular} de dimensión $m$ en $\mathbb{R}^n$ ($m < n$) a todo subconjunto $M$ de $\mathbb{R}^n$ tal que $\forall x_0 \in M$ existe $A \subset \mathbb{R}^n$ abierto  que contiene a $x_0$ y existe una aplicación $F: A \to \mathbb{R}^{n-m}$, regularen cada punto de $A$, por lo que el rango de $J_F(x_0)$ es $n-m$, tal que:
+    $$M \cup A = \{x \in A : F(x) = 0 \in \mathbb{R}^{n-m}\}$$
+\end{definición}
+
+\begin{definición}[Extremos relativos condicionados]
+    Sean $B$ es un conjunto abierto de $\mathbb{R}^n$ y $f$ una aplicación definidade $B$ en $\mathbb{R}$ y $M$ un subconjunto de $B$, se dice que un punto $x_0 \in M$ es un \textbf{máximo relativo condicionado} de $f$ en $M$ si existe un entorno abierto $U$ de $x_0$ tal que $U \cap M \subset B$ y $f(x) \leq f(x_0)$ para todo $x \in U \cap M$. Se dice que es un \textbf{mínimo relativo condicionado} si se cumple la desigualdad inversa.
+\end{definición}
+
+
+\begin{lema}
+    Sea $F:A\subset \mathbb{R}^{n-m} \times \mathbb{R}^m \to \mathbb{R}^{n-m}$ de clase $C^1$ en el abierto de $A$ y sea
+    $$ M = \{x = (x_1, \ldots, x_{n-m}, \ldots,x_n) \in : F(x) = 0\}$$
+    Entonces para todo $x_0 = (x_{0_1}, \ldots, x_{0_{n-m}}, \ldots, x_{0_n}) \in M$ tal que $det(D_iF_j(x_0))_{i, j = 1, \ldots, n-m} \neq 0$ existe un entorno abierto $Y_0 \subset \mathbb{R}^m$ y existe $\psi: Y_0 \to A$ regular en cada putnod e $Y_0$ tal que $\psi(y_0) = x_0$ y $F(\psi(y)) = 0 \forall y \in Y_0$.
+\end{lema}
+
+\begin{teorema}[Teorema de los multiplicadores de Lagrange]
+    Sea $f, g_1, \ldots, g_m: A \subset \mathbb{R}^n \to \mathbb{R}$ funciones de clase $C^1$ con $m < n$. Consideremos el conjunto
+    $$M = \{x \in A : g_i(x) = 0 \quad i = 1, \ldots, m\}$$
+    Supongamos que $x_0 \in M : \nabla g_1(x_0), \ldots, \nabla g_m(x_0)$ son linealmente independientes y $x_0$ es un extremo relativo de $f$ restringido a $M$. Entonces, existen $\lambda_1, \ldots, \lambda_m \in \mathbb{R}$ tales que:
+    $$\nabla f(x_0) = \sum_{i=1}^m \lambda_i \nabla g_i(x_0)$$
+\end{teorema}
+\begin{observación}
+    \begin{enumerate}
+        \item A los $\lambda_i$ se les llama \textbf{multiplicadores de Lagrange} y a la función $L = f + \sum_{i=1}^m \lambda_i g_i$ se le llama \textbf{función de Lagrange} o \textbf{función langrangiana}.
+        El teorema nos dice que debemos buscar $x_0$ tal que: 
+        $$\begin{cases}
+            \nabla L(x_0) = \nabla f(x_0) + \sum_{i=1}^m \lambda_i \nabla g_i(x_0) = 0 \\
+            g_i(x_0) = 0 \quad i = 1, \ldots, m
+        \end{cases}$$
+        \item El teoremase puede enunciar en mayor generalidad que sobre variedades diferenciales $M$
+        \item En todo caso, el conjunto $M$ debe ser muy regular (sin picos)
+    \end{enumerate}
+\end{observación}
