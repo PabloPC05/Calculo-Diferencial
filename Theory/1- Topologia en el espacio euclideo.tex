@@ -91,13 +91,13 @@
 
 \begin{proof}
     Fijemos $\vec{x}$ y $\vec{y} \in \mathbb{R}^n$. Para cada $\alpha \in \mathbb{R}$ se tiene que 
-    $$\langle \alpha \vec{x} + \vec{y}, \alpha \vec{x} + \vec{y} \rangle  = \alpha^2 \langle , \rangle + 2\alpha \langle x, y\rangle + \langle y, y \rangle \geq 0$$
+    $$\langle \alpha \vec{x} + \vec{y}, \alpha \vec{x} + \vec{y} \rangle  = \alpha^2 \langle \vec{x}, \vec{x} \rangle + 2\alpha \langle x, y\rangle + \langle y, y \rangle \geq 0$$
     Si tomamos $A = \langle \vec{x}, \vec{x} \rangle$, $B = 2\langle \vec{x}, \vec{y} \rangle$ y $C = \langle \vec{y}, \vec{y} \rangle$, tenemos que: 
     $$A\alpha^2 + B\alpha + C \geq 0 \quad \forall \alpha \in \mathbb{R}$$
     Entoncespodemos distinguir dos casos:
     \begin{enumerate}
         \item Si \( A = 0 \), entonces \( \vec{x} = \vec{0} \) y la desigualdad es trivial.
-        \item Si \( A > 0 \), entonces la desigualdad anterior es una ecuación cuadrática en \( \alpha \), y por las propiedades del producto escalar es necasrio que su discriminantes sea no positivo, pues de lo contrario tendría dos raíces reales distintias y entonces la ecuacion tomaría algún valor negativo 
+        \item Si \( A > 0 \), entonces la desigualdad anterior es una ecuación cuadrática en \( \alpha \), y por las propiedades del producto escalar es necesario que su discriminante sea no positivo, pues de lo contrario tendría dos raíces reales distintias y entonces la ecuacion tomaría algún valor negativo 
         $$\implies D = B^2 - 4AC \leq 0 \iff B^2 \leq 4AC \iff 4\langle \vec{x}, \vec{y} \rangle^2 \leq 4\langle \vec{x}, \vec{x} \rangle \langle \vec{y}, \vec{y} \rangle = 4\|x\|^2 \|y\|^2$$
     \end{enumerate}
 

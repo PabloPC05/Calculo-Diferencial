@@ -1,4 +1,5 @@
 \section{Aplicaciones diferenciables}
+\subsection{Derivadas direccionales y gradiente}
 \begin{definición}[Dirección]
     Llamaremos \textbf{dirección} a un vector $v\in\mathbb{R}^n$. Normalmente de norma $1$. \\
     Si por ejemplo tenemos $n = 1$ tenemos sólo dos direcciones, $v = 1$ y $v = -1$. En cambio para $n > 1$ tenemos infinitas direcciones. En el caso de $\mathbb{R}^2$ las direccionesde norma 1 pueden escribirse de la forma $v = (\cos\theta, \sin\theta)$, con $\theta\in[0,2\pi)$. \\
@@ -56,20 +57,19 @@
     $$ L(v) = D_vf(x_0) = \nabla f(x_0) \cdot v $$
 \end{teorema}
 \begin{proof}
-    Tomando sólo vectores $h$ de la forma $tv$ con $t \in \mathbb{R}$, tenemos que
-    \[
-    \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0) - tL(v)}{|t|} = 0
-    \]
-    (\text{nótese que} $\|v\| = 1$) con lo que, con el mismo argumento que hemos utilizado al principio de esta sección, obtenemos que
-    \[
-    \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0) - tL(v)}{t} = 0
-    \]
-    y por lo tanto que
-    \[
-    \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0)}{t} = L(v),
-    \]
-    luego $f$ es derivable en $x_0$ en la dirección $v$ y $D_v f(x_0) = L(v)$.
+    Tomando sólo vectores $h$ de la forma $h = tv$ con $t \in \mathbb{R}$, tales que $\|v\| = 1$, tenemos que, por la diferenciabilidad de $f$ en $x_0$, se cumple que
+    $$\lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0) - L_{x_0}(tv)}{\|tv\|} = $$
+    $$ = \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0) - tL_{x_0}(v)}{|t|} = 0 \iff$$
+    $$\iff \lim_{t \to 0} \left| \frac{f(x_0 + tv) - f(x_0) - tL_{x_0}(v)}{|t|} \right| = 0$$
+    $$\iff \lim_{t \to 0} \frac{|f(x_0 + tv) - f(x_0) - tL_{x_0}(v)|}{|t|} = 0 \iff$$
+    $$\iff \lim_{t \to 0} \left| \frac{f(x_0 + tv) - f(x_0) - tL_{x_0}(v)}{|t|}  \right| = 0 \iff$$
+    $$\iff \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0)}{|t|} - L_{x_0}(v) = 0$$ 
+    $$\iff \lim_{t \to 0} \frac{f(x_0 + tv) - f(x_0)}{|t|} = L_{x_0}(v)$$
+    luego $f$ es derivable en $x_0$ en la dirección $v$ y se tiene que $D_vf(x_0)= L(v)$.
+
 \end{proof}
+
+\subsection{Aplicaciones diferenciables}
 
 \begin{definición}[Diferencial]
     Para represemtar la función $L$ usaremos la notación $df_{x_0}$, que se llama \textbf{diferencial} de $f$ en $x_0$. \\
@@ -223,6 +223,8 @@
     para los $x$ tales que $\|x - x_0\| < \delta_1$, donde $M = C + 1$.
 \end{proof}
 
+\subsection{Regla de la cadena}
+
 \begin{teorema}[Regla de la cadena]
     Sea $A, \subset \mathbb{R}^n$ y $B \subset \mathbb{R}^m$ abiertos y $f: A \to \mathbb{R}^m$ y $g: B \to \mathbb{R}^p$ tales que $f(A) \subset B$, f es diferenciable en $x_0 \in A$ y $g$ es diferenciable en $f(x_0)$. Entonces $g \circ f$ es diferenciable en $x_0$ y
     $$ d(g \circ f)(x_0) = dg(f(x_0)) \circ df(x_0) $$
@@ -259,6 +261,8 @@
 \begin{observación}
     Las bolas son conjuntos convexos con lo que $L[x, y] \subset B(x_0, r)$ 
 \end{observación}
+
+\subsection{Teoremas del valor medio}
 
 \begin{teorema}[Teorema del Valor Medio]
     Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}^m$ una aplicación diferenciable en cada punto de $A$. Entonces para todo $x, y \in A$ tales que $L[x, y] \subset A$ y para todo $z \in \mathbb{R}^m$ se verifica que existe $c \in L[x, y]$ tales que: 
@@ -309,6 +313,8 @@
 \begin{corolario}
     Sea $A \subset \mathbb{R}^n$ abierto y convexoy $f: A \subset \mathbb{R}^m$ es diferenciable en $A$ y $df(x) = 0 \forall x \in A$. Entonces $f$ es constante en $A$.
 \end{corolario}
+
+\subsection{Derivadas de orden superior. Teorema de Taylor}
 \begin{definición}[Derivada parciales segundo]
     Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}$ una aplicación diferenciable en $A$. Entonces la \textbf{derivada parcial segunda} de $f$ respecto a la variable $x_i$ es
     $$\frac{\partial^2 f}{\partial x_i^2}(x) = \frac{\partial}{\partial x_i}\left(\frac{\partial f}{\partial x_i}(x)\right)$$
@@ -366,7 +372,7 @@
     $$st D_{ij}f(x_0 + \alpha_1 te_i + \beta_1 se_j) = ts D_{ji}f(x_0 + \alpha_2 se_j + \beta_2 te_i)$$
     Entoncesporla desigualdad triangular tenemos que
     $$|D_{ij}f(x_0) - D_{ji}f(x_0)| \leq |D_{ij}f(x_0) - D_{ij}f(x_0 + \alpha_2 se_j + \beta_2 te_i)| + |D_{ji}f(x_0 + \alpha_2 se_j + \beta_2 te_i) - D_{ji}f(x_0)|$$
-    y tal como habíamos tomado $s$ y $t$ esta suma esmenor que $\epsilon$ pues $\|\alpha_2 s e_j +\beta_2 t e_i\| < s + t < \delta$ y $\|\alpha_1 t e_i + \beta_1 s e_j\| < s + t < \delta$. Por tanto, la arbitrariedad de $\epsilon$ nos da que $D_{ij}f(x_0) = D_{ji}f(x_0)$. 
+    y tal como habíamos tomado $s$ y $t$ esta suma es menor que $\epsilon$ pues $\|\alpha_2 s e_j +\beta_2 t e_i\| < s + t < \delta$ y $\|\alpha_1 t e_i + \beta_1 s e_j\| < s + t < \delta$. Por tanto, la arbitrariedad de $\epsilon$ nos da que $D_{ij}f(x_0) = D_{ji}f(x_0)$. 
 \end{proof}
 \begin{observación}
     \begin{enumerate}
@@ -422,6 +428,8 @@
     $$ = f(x_0) + \sum_{i_1=1}^n D_{i_1}f(x_0) h_{i_1} + \frac{1}{2!} \sum_{i_1=1}^n \sum_{i_2=1}^n D_{i_1 i_2}f(x_0) h_{i_1} h_{i_2} + \cdots + \frac{1}{k!} \sum_{i_1=1}^n \cdots \sum_{i_k=1}^n D_{i_1 \cdots i_k}f(x_0) h_{i_1} \cdots h_{i_k} + R_k(1)$$
 
 \end{proof}
+
+\subsection{Extremos locales}
 \begin{definición}[Extremos relativos y absolutos]
     Diremos $f: A \subset \mathbb{R}^n$ y $x_0 \in A$. Diremos que $f$ tiene un máximo relativo en $x_0$ si existe $r > 0$ tal que $B(x_0, r) \subset A$ y $f(x) \leq f(x_0)$ para todo $x \in B(x_0, r)$. Si existe una bola centrada en $x_0$ en la $f(x) \leq f(x_0)$ diremos que $f$ tiene un mínimo relativo en $x_0$. Cuando se da alguna de esas desigualdades para todo $x \in A$ diremos que $f$ tiene un máximo absoluto en $x_0$ y un mínimo absoluto en $x_0$.
 \end{definición}
@@ -548,9 +556,11 @@
 \end{teorema}
 
 \begin{observación}
-    Las funcionesdemásdeunavariablepuedentenerun único punto crítico y éstepuedeser un extremo relativo y no absoluto. Por ejemplo, la función$$f(,y) =y^2 +x^2(1+ y)^3$$
+    Las funciones de más de una variable pueden tener un único punto crítico y éste puede ser un extremo relativo y no absoluto. Por ejemplo, la función $$f(,y) =y^2 +x^2(1+ y)^3$$
     tiene un único punto crítico en $(0, 0)$ y es un mínimo relativo pero no absoluto, ya que $f(0,0) = 0$ y $f(1, -4) = -9$
 \end{observación}
+
+\subsection{Teoremas de la función inversa, implícita y de los multiplicadores de Lagrange}
 
 \begin{proposición}
     Sea $f: U \subset \mathbb{R}^n \to \mathbb{R}^n$ k-lipschitz con $k \in (0,1) \iff \forall x, y \in U \implies \|f(x) - f(y)\| \leq k \|x - y\|$. \\
@@ -584,6 +594,8 @@
 \begin{proposición}
     Sea $f: A \subset \mathbb{R}^n \to \mathbb{R}^n$ una aplicación de clase $C^1$ en el abierto de $A$ y supongamos que para un punto $x_0 \in A$ se verifica que $det(J_f(x_0)) \neq 0$. Entonces, $\exists r > 0$ tal que $B(x_0, r) \subset A$, $f$ es inyectiva en $B(x_0, r)$ y $det(J_f(x)) \neq 0 \forall x \in B(x_0, r)$
 \end{proposición}
+
+
 
 \begin{teorema}[Teorema de la función inversa]
     Sea $f: A \to \mathbb{R}^n \in C^1(A, \mathbb{R}^n)$ y supongamos que $x_0 \in A$ se verifica que $det(J_f(x_0)) \neq 0$. Entonces existen entornos abiertos $U$ de $x_0$ y $V$ de $f(x_0)$ y una única aplicación $g: V \subset \mathbb{R}^n \to U \subset \mathbb{R}^n$ tal que:
@@ -623,14 +635,14 @@
 \begin{lema}
     Sea $F:A\subset \mathbb{R}^{n-m} \times \mathbb{R}^m \to \mathbb{R}^{n-m}$ de clase $C^1$ en el abierto de $A$ y sea
     $$ M = \{x = (x_1, \ldots, x_{n-m}, \ldots,x_n) \in : F(x) = 0\}$$
-    Entonces para todo $x_0 = (x_{0_1}, \ldots, x_{0_{n-m}}, \ldots, x_{0_n}) \in M$ tal que $det(D_iF_j(x_0))_{i, j = 1, \ldots, n-m} \neq 0$ existe un entorno abierto $Y_0 \subset \mathbb{R}^m$ y existe $\psi: Y_0 \to A$ regular en cada putnod e $Y_0$ tal que $\psi(y_0) = x_0$ y $F(\psi(y)) = 0 \forall y \in Y_0$.
+    Entonces para todo $x_0 = (x_{0_1}, \ldots, x_{0_{n-m}}, \ldots, x_{0_n}) \in M$ tal que $det(D_iF_j(x_0))_{i, j = 1, \ldots, n-m} \neq 0$ existe un entorno abierto $Y_0 \subset \mathbb{R}^m$ y existe $\psi: Y_0 \to A$ regular en cada punto de $Y_0$ tal que $\psi(y_0) = x_0$ y $F(\psi(y)) = 0 \forall y \in Y_0$.
 \end{lema}
 
 \begin{teorema}[Teorema de los multiplicadores de Lagrange]
-    Sea $f, g_1, \ldots, g_m: A \subset \mathbb{R}^n \to \mathbb{R}$ funciones de clase $C^1$ con $m < n$. Consideremos el conjunto
-    $$M = \{x \in A : g_i(x) = 0 \quad i = 1, \ldots, m\}$$
-    Supongamos que $x_0 \in M : \nabla g_1(x_0), \ldots, \nabla g_m(x_0)$ son linealmente independientes y $x_0$ es un extremo relativo de $f$ restringido a $M$. Entonces, existen $\lambda_1, \ldots, \lambda_m \in \mathbb{R}$ tales que:
-    $$\nabla f(x_0) = \sum_{i=1}^m \lambda_i \nabla g_i(x_0)$$
+    Sea $f: B \subset \mathbb{R}^n \to \mathbb{R}$ de clase $C^1$ en el abierto de $B$, definamos una variedad regular $M$ contenida en $B$ de dimensión $m < n$ tal que contenga a un extremo relativo $x_0 = (x_{0_1}, \ldots, x_{0_{n-m}}, \ldots x_{0_n}) \in M$ de la función $f\vert_{M}$, entonces podemos definir una funcion $F: \mathbb{R}^{n - m} \times \mathbb{R}^m \to \mathbb{R}^{n-m}$ tal que: 
+    $$M \cup A = \{x \in A : F(x) = 0\}$$
+    y podemos definir $\lambda_1, \ldots, \lambda_{n-m} \in \mathbb{R}$ tales que: 
+    $$\nabla f(x) = \lambda_1 \nabla F_1(x) + \ldots + \lambda_{n - m}\nabla F_{n-m}(x)$$
 \end{teorema}
 \begin{observación}
     \begin{enumerate}
